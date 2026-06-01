@@ -1,0 +1,67 @@
+<section class="section_brand col-xl-12 col-lg-12">
+	<div class="section">
+		<div class="slick_product slickbrand swiper-container">
+			<div class="swiper-wrapper">
+				{%-for b in (1..8) -%}
+				{%capture img%}brand{{b}}.png{%endcapture%}
+				{%capture url%}url_{{b}}_brand{%endcapture%}
+				{%capture title%}title_{{b}}_brand{%endcapture%}
+				<div class="swiper-slide item">
+					<div class="brand">
+						<a href="{{settings[url]}}" title="{{settings[title]}}">
+							<img src="{{img | asset_url}}" alt="{{settings[title]}}"/>
+						</a>
+					</div>
+				</div>
+				{% endfor %}
+			</div>
+			{% comment %}
+			<div class="swiper-button-prev"></div>
+			<div class="swiper-button-next"></div>
+			{% endcomment %}
+		</div>
+	</div>
+</section>
+
+<script>
+	var swiper = new Swiper('.slick_product', {
+		slidesPerView: 8,
+		loop: false,
+		grabCursor: true,
+		spaceBetween: 0,
+		roundLengths: false,
+		slideToClickedSlide: false,
+		slidesPerGroup: 2,
+		navigation: {
+			nextEl: '.slick_product .swiper-button-next',
+			prevEl: '.slick_product .swiper-button-prev',
+		},
+		autoplay: false,
+		breakpoints: {
+			300: {
+				slidesPerView: 2,
+				spaceBetween: 0
+			},
+			500: {
+				slidesPerView: 2,
+				spaceBetween: 0
+			},
+			640: {
+				slidesPerView: 3,
+				spaceBetween: 0
+			},
+			768: {
+				slidesPerView: 4,
+				spaceBetween: 0
+			},
+			991: {
+				slidesPerView: 5,
+				spaceBetween: 0
+			},
+			1200: {
+				slidesPerView: 8,
+				spaceBetween: 0
+			}
+		}
+	});
+</script>
