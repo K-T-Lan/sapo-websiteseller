@@ -1,0 +1,61 @@
+<section class="section_slider">
+	<div class="home-slider swiper-container">
+		<div class="swiper-wrapper">
+			{%- for i in (1..5) -%}
+			{%-capture enable_slide-%}display_slideshow_{{i}}{%-endcapture-%}
+			{%-capture naviimage-%}slider_{{i}}.jpg{%-endcapture-%}
+			{%-capture naviimage_mb-%}slider_mb_{{i}}.jpg{%-endcapture-%}
+			{%-capture url-%}slideshow_{{i}}_link{%-endcapture-%}
+			{%-capture alt-%}slide_{{i}}_alt{%-endcapture-%}
+			{%-if settings[enable_slide]-%}
+			<div class="swiper-slide">
+				<a href="{{ settings[url]}}" class="clearfix" title="{{ settings[alt]}}">
+					<picture>
+						<source 
+								media="(min-width: 1200px)"
+								srcset="{{ naviimage | asset_url }}">
+						<source 
+								media="(min-width: 992px)"
+								srcset="{{ naviimage | asset_url }}">
+						<source 
+								media="(min-width: 569px)"
+								srcset="{{ naviimage | asset_url }}">
+						<source 
+								media="(max-width: 567px)"
+								srcset="{{ naviimage_mb | asset_url}}">
+						<img width="1903" height="580" src="{{ naviimage | asset_url | img_url:'grande' }}" alt="{{ settings[alt] | escape}}" class="img-responsive" />
+					</picture>
+				</a>
+			</div>
+			{%-endif-%}
+			{%-endfor-%}
+		</div>
+		<div class="swiper-button-prev"></div>
+		<div class="swiper-button-next"></div>
+		{% comment %}
+		<div class="swiper-pagination"></div>
+		{% endcomment %}
+	</div>
+</section>
+<script>
+	var swiper = new Swiper('.home-slider', {
+	loop: true,
+
+	autoplay: {
+		delay: 3000,
+		disableOnInteraction: false,
+	},
+
+	speed: 1000,
+
+	pagination: {
+		el: '.home-slider .swiper-pagination',
+		clickable: true,
+	},
+
+	navigation: {
+		nextEl: '.home-slider .swiper-button-next',
+		prevEl: '.home-slider .swiper-button-prev',
+	},
+});
+</script>
