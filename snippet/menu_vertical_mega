@@ -1,0 +1,66 @@
+<ul class="ul_menu site-nav-vetical">
+	{% assign e = 0 %}
+	{% if linklists[settings.mega_menus].links.size > 0 %}
+	{% assign menu = settings.mega_menus %}
+	{% else %}
+	{% assign menu = 'main-menu' %}
+	{% endif %}
+	{% for link in linklists[menu].links %}
+	{% if linklists[link.alias] != null %}
+	{% assign e = e | plus: 1 %}
+	{%capture cateimage%}cate-image-{{e}}.jpg{%endcapture%}
+	{%capture catelink%}cate-link-{{e}}{%endcapture%}
+	<li class="nav_item lev-1 lv1 li_check">
+		<a href="{{ link.url }}" title="{{link.title}}">{{ link.title }}
+			<i>
+				<svg aria-hidden="true" focusable="false" data-prefix="far" data-icon="chevron-right" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 512" class="svg-inline--fa fa-chevron-right fa-w-8"><path fill="currentColor" d="M24.707 38.101L4.908 57.899c-4.686 4.686-4.686 12.284 0 16.971L185.607 256 4.908 437.13c-4.686 4.686-4.686 12.284 0 16.971L24.707 473.9c4.686 4.686 12.284 4.686 16.971 0l209.414-209.414c4.686-4.686 4.686-12.284 0-16.971L41.678 38.101c-4.687-4.687-12.285-4.687-16.971 0z" class=""></path></svg>
+			</i>
+		</a>
+
+		<ul class="ul_content_right_1 row">
+			{% for childlink in linklists[link.alias].links %}
+			{% if linklists[childlink.alias] != null %}
+			<li class="nav_item lv2 col-lg-fix-5 col-md-fix-5 col-sm-12 col-xs-12">
+				<a href="{{ childlink.url }}" title="{{childlink.title}}">{{ childlink.title }}</a>
+				<ul class="ul_content_right_2">
+					{% for childlink2 in linklists[childlink.alias].links %}
+					<li class="nav_item lv3"><a href="{{childlink2.url}}" title="{{childlink2.title}}">{{childlink2.title}}</a></li>
+					{%endfor%}
+				</ul>
+			</li>
+			{%else%}
+			<li class="nav_item lv2 col-lg-fix-5 col-md-fix-5 col-sm-12 col-xs-12"><a href="{{ childlink.url }}" title="{{childlink.title}}">{{ childlink.title }}</a></li>
+			{%endif%}
+			{%endfor%}
+			{% if settings[catelink] != '' %}
+			<li class="banner_img_mega hidden-sm hidden-xs">
+				<a class="banner_" href="{{ settings[catelink]}}" title="{{ link.title }}">
+					<img class="imageload lazyload" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsQAAA7EAZUrDhsAAAANSURBVBhXYzh8+PB/AAffA0nNPuCLAAAAAElFTkSuQmCC" data-src="{{ cateimage | asset_url }}"  alt="{{ link.title }}">
+				</a>
+			</li>
+			{% endif %}
+		</ul>
+	</li>
+	{%else%}
+	<li class="nav_item lev-1 lv1 li_check">
+		<a href="{{ link.url }}" title="{{link.title}}">{{ link.title }}
+		</a>
+	</li>
+	{%endif%}
+	{%endfor%}
+
+
+
+	{%comment%}
+	<li class="lev-1 xemthem hidden-lgg nav_item clearfix {% if linklists[link.alias] %}has-mega mega-menu{%endif%}">
+		<a href="javascript:;">
+			Xem thêm			
+		</a> 
+	</li>
+	<li class="lev-1 thugon hidden-lgg nav_item clearfix {% if linklists[link.alias] %}has-mega mega-menu{%endif%}">
+		<a href="javascript:;">
+			Thu gọn				
+		</a> 
+	</li>
+	{%endcomment%}
+</ul>
