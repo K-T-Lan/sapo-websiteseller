@@ -1,0 +1,58 @@
+<div class="wrapmenu">
+	<div class="wrapmenu_full menumain_full">
+		<div class="containers">
+			<!-- Menu mobile -->
+			<div class="contenttop">
+				<div class="section margin-bottom-10 margin-top-20">
+					{% if customer %}
+					<a class="btnx" href="/account">Tài khoản</a>&nbsp;/
+					<a href="/account/logout">Đăng xuất</a>
+					{%else%}
+					<a class="btnx" href="/account/login">Đăng nhập</a>&nbsp;/
+					<a href="/account/register">Đăng ký</a>
+					{%endif%}
+				</div>
+			</div>
+			<div class="menu_mobile">
+				<ul class="ul_collections">
+					{% for link in linklists[settings.main_menu].links %}
+					<li class="level0 level-top parent">
+						<a href="{{ link.url }}">{{ link.title }}</a>
+						{% if linklists[link.alias] != null %}
+						<svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="plus" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="svg-inline--fa fa-plus fa-w-14"><path fill="currentColor" d="M416 208H272V64c0-17.67-14.33-32-32-32h-32c-17.67 0-32 14.33-32 32v144H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h144v144c0 17.67 14.33 32 32 32h32c17.67 0 32-14.33 32-32V304h144c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z" class=""></path></svg>
+						<ul class="level0" style="display:none;">
+							{% for childlink in linklists[link.alias].links %}
+							<li class="level1 {% if childlink.active %} active {%endif%}"> 
+								<a href="{{ childlink.url }}"> <span>{{ childlink.title }}</span> </a>
+								{% if linklists[childlink.alias] != null %}
+								<svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="plus" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="svg-inline--fa fa-plus fa-w-14"><path fill="currentColor" d="M416 208H272V64c0-17.67-14.33-32-32-32h-32c-17.67 0-32 14.33-32 32v144H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h144v144c0 17.67 14.33 32 32 32h32c17.67 0 32-14.33 32-32V304h144c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z" class=""></path></svg>
+								<ul class="level1" style="display:none;">
+									{% for childlink2 in linklists[childlink.alias].links %}
+									<li class="level2 {% if childlink2.active %} active {%endif%}">
+										<a href="{{ childlink2.url }}"><span>{{ childlink2.title }}</span></a>
+										{% if linklists[childlink2.alias] != null %}
+										<svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="plus" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="svg-inline--fa fa-plus fa-w-14"><path fill="currentColor" d="M416 208H272V64c0-17.67-14.33-32-32-32h-32c-17.67 0-32 14.33-32 32v144H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h144v144c0 17.67 14.33 32 32 32h32c17.67 0 32-14.33 32-32V304h144c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z" class=""></path></svg>
+										<ul class="level2" style="display:none;">
+											{% for childlink3 in linklists[childlink2.alias].links %}
+											<li class="level3 {% if childlink3.active %} active {%endif%}">
+												<a href="{{ childlink3.url }}"><span>{{ childlink3.title }}</span></a>
+											</li>
+											{% endfor %}
+										</ul>
+										{% endif %}
+									</li>
+									{% endfor %}
+								</ul>
+								{%endif%}
+							</li>
+							{% endfor %}
+						</ul>
+						{%endif%}
+					</li>
+					{% endfor %}
+				</ul>
+			</div>
+		</div>
+	</div>
+
+</div>
