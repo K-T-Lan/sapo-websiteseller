@@ -1,0 +1,17 @@
+{% assign description_parts = product.content | split: "<h6>" %}
+{% for part in description_parts %}
+{% assign fp = part | append: " " | split: "</h6>" | last %}
+{% assign p = part | append: " " | split: "</h6>" | last | strip_html | replace: "&nbsp;", "" | replace: " ", "" | strip_newlines %}
+{% if p != "" or fp contains "<img" or fp contains "<iframe" %}
+{% if forloop.index0 == '0' %}
+{% else %}
+<div class="box-promotion">
+	<p class="fk-tit">{{ settings.product_promotion_title }} <span>({{ settings.product_promotion_title_m }})</span></p>
+	<div class="fk-main">
+		{{ part | split: "</h6>" | last | replace: "<div", "<span" | replace: "</div", "</span" }}
+	</div>
+	<input name="properties[Khuyến mãi]" type="hidden" value="{{ part | split: "</h6>" | last | replace: "<div", "<span" | replace: "</div", "</span" |strip_html}}" />
+</div>
+{% endif %}
+{% endif %}
+{% endfor %}
