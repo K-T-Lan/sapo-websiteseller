@@ -1,0 +1,17 @@
+{% layout none %}
+{% assign module_product_count = collection.products_count %}
+<div>
+	{% if collection.products.size == 0 %}
+	<p class="a-center margin-0 padding-0">Danh mục đang cập nhật</p>
+	{% else%}
+	<div class="slick_product {% if module_product_count <= 6%}slickone{%else%}slicktwo{%endif%}">
+		{% for product in collection.products limit: settings.limittab %}
+		<div class="item">
+			<div class="item_product_main">
+				{%include 'product_grid_office'%}
+			</div>
+		</div>
+		{%endfor%}
+	</div>
+	{%endif%}
+</div>
