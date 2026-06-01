@@ -1,0 +1,25 @@
+<section class="section_product_featured module_product">
+	<div class="container">
+		<div class="block-title">
+			<h2>
+				<a href="{{settings.section_featured_url}}" title="{{settings.section_featured_title}}">{{settings.section_featured_title}}</a>
+			</h2>
+		</div>
+		<div class="block-product">
+			{%- if collections[settings.section_featured_url].products.size > 0 -%}
+			<div class="row">
+				{%- for product in collections[settings.section_featured_url].products limit: settings.section_featured_limit -%}
+				<div class="item col-md-3 col-6">
+					{%- include 'product_grid_office' -%}	
+				</div>
+				{%- endfor -%}
+			</div>
+			<div class="view-more">
+				<a href="{{settings.section_featured_url}}" title="Xem tất cả">Xem tất cả</a>
+			</div>
+			{%- else -%}
+			<div class="alert alert-warning" role="alert"><strong>{{ settings.section_featured_title }}!</strong> Đang được cập nhật nội dung.</div>
+			{%- endif -%}
+		</div>
+	</div>
+</section>
