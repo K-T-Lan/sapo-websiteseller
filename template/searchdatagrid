@@ -1,0 +1,104 @@
+<div id="data_grid" class="col-md-12 col-sm-12 col-xs-12 cate-lvl-2-main--right" style="margin-top:15px;">
+  <div class="toolbar hidden">
+    <div class="sorter">
+      <div class="view-mode">
+        <a class="is-grid-view">
+          <i class="fa fa-th"></i>
+        </a>
+        <a class="is-list-view">
+          <i class="fa fa-th-list"></i>
+        </a>
+      </div>
+    </div>
+
+    <div id="sort-by">
+      <label class="left">Sắp xếp: </label>
+      <ul>
+        <li>
+          Thứ tự<span class="right-arrow"></span>
+          <ul>
+            <li>
+              <a href="?sortby=manual">Mặc định</a>
+            </li>
+            <li>
+              <a href="?sortby=best-selling">Bán chạy nhất</a>
+            </li>
+            <li>
+              <a href="?sortby=alpha-asc">A -- Z</a>
+            </li>
+            <li>
+              <a href="?sortby=alpha-desc">Z -- A</a>
+            </li>
+            <li>
+              <a href="?sortby=price-asc">Giá tăng dần</a>
+            </li>
+            <li>
+              <a href="?sortby=price-desc">Giá giảm dần</a>
+            </li>
+            <li>
+              <a href="?sortby=created-desc">Hàng mới nhất</a>
+            </li>
+            <li>
+              <a href="?sortby=created-asc">Hàng cũ nhất</a>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+
+  </div>
+  <div class="row cate-lvl-2__list">
+    {% paginate search.results by 9 %}
+    <div class="category-products wow bounceInUp animated">
+      <ul class="pdt-list products-grid zoomOut play">
+        {% for product in search.results %}
+        <li class="item item-animate{% if forloop.last == true %} last{% endif %}">
+          {% include 'grid_product' %}
+        </li>
+        {% endfor %}
+      </ul>
+    </div>
+
+    {% if paginate.pages > 0 %}
+    <div class="pager clearfix">
+      <div class="pages">
+        <label>Trang:</label>
+        <ul class="pagination">
+          {% if paginate.previous %}
+          <li>
+            <a href="javascript:;" onclick="doSearch({{ paginate.current_page | minus: 1 }})" title="{{ paginate.previous.title }}">
+              <i class="fa fa-angle-left" ></i>
+            </a>
+          </li>
+          {% endif %}
+          {% for part in paginate.parts %}
+          {% if part.is_link %}
+          <li>
+            <a href="javascript:;" onclick="doSearch({{ part.title }})">{{ part.title }}</a>
+          </li>
+          {% else %}
+          {% if part.title == paginate.current_page %}
+          <li class="active">
+            <a href="#" style="pointer-events:none">{{ part.title }}</a>
+          </li>
+          {% else %}
+          <li>
+            <a href="javascript:;" onclick="doSearch({{ part.title }})">{{ part.title }}</a>
+          </li>
+          {% endif %}
+          {% endif %}
+          {% endfor %}
+          {% if paginate.next %}
+          <li>
+            <a href="javascript:;" onclick="doSearch({{ paginate.current_page | plus: 1 }})" title="{{ paginate.next.title }}">
+              <i class="fa fa-angle-right" ></i>
+            </a>
+          </li>
+          {% endif %}
+        </ul>
+      </div>
+    </div>
+    {% endif %}
+    {% endpaginate %}
+  </div>
+</div>
