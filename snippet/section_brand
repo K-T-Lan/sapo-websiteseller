@@ -1,0 +1,58 @@
+<section class="section_brand">
+	<div class="container">
+		<div class="brand-swiper swiper-container">
+			<div class="swiper-wrapper">
+				{%- for i in (1..6) -%}
+				{%-capture enable_slide-%}enable_brand_{{i}}{%-endcapture-%}
+				{%-capture image-%}img_brand_{{i}}.jpg{%-endcapture-%}
+				{%-capture url-%}url_brand_{{i}}{%-endcapture-%}
+				{%-capture alt-%}alt_brand_{{i}}{%-endcapture-%}
+				{%-if settings[enable_slide]-%}
+				<div class="swiper-slide">
+					<a href="{{ settings[url]}}" title="{{ settings[alt]}}">
+						<img width="150" height="90" src="{{ image | asset_url }}" alt="{{ settings[alt] | escape}}" class="img-responsive" />
+					</a>
+				</div>
+				{%-endif-%}
+				{%-endfor-%}
+			</div>
+		</div>
+	</div>
+</section>
+<script>
+	var swiperwish = new Swiper('.brand-swiper', {
+		slidesPerView: 6,
+		loop: false,
+		grabCursor: true,
+		spaceBetween: 30,
+		roundLengths: true,
+		slideToClickedSlide: false,
+		autoplay: false,
+		breakpoints: {
+			300: {
+				slidesPerView: 2,
+				spaceBetween: 10
+			},
+			500: {
+				slidesPerView: 2,
+				spaceBetween: 10
+			},
+			640: {
+				slidesPerView: 2,
+				spaceBetween: 10
+			},
+			768: {
+				slidesPerView: 4,
+				spaceBetween: 30
+			},
+			991: {
+				slidesPerView: 5,
+				spaceBetween: 30
+			},
+			1200: {
+				slidesPerView: 6,
+				spaceBetween: 30
+			}
+		}
+	});
+</script>
