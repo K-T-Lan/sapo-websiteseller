@@ -1,0 +1,61 @@
+{% assign mycontent = product.content | split:'<h6>' %}
+{% assign description_parts = mycontent[0] | split: "<h5>" %}
+{% for part in description_parts %}
+{% assign fp = part | append: " " | split: "</h5>" | last %}
+{% assign p = part | append: " " | split: "</h5>" | last | strip_html | replace: "&nbsp;", "" | replace: " ", "" | strip_newlines %}
+{% if p != "" or fp contains "<img" or fp contains "<iframe" %}
+{% if forloop.index0 == '0' %}
+{% else %}
+<div class="specifications margin-bottom-20">
+	<h2 class="fs-dttop">{{ settings.product_specifications_title }}</h2>
+	<div class="fs-tsright">
+		{{ product.summary }}
+	</div>
+	<button type="button" class="btn btn-primary btn-specifications" data-toggle="modal" data-target="#specifications">
+		Xem chi tiết thông số kĩ thuật
+	</button>
+	<div class="modal fade" id="specifications" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		<div class="specifications-overlay"></div>
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close close-specifications" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<h4 class="modal-title" id="myModalLabel">Thông số kỹ thuật chi tiết</h4>
+				</div>
+				<div class="modal-body">
+					{{ part | split: "</h5>" | last | replace: "<div", "<span" | replace: "</div", "</span"}}
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+{% endif %}
+{% endif %}
+{% endfor %}
+
+<script>
+	$(document).ready(function () {
+		var modal = $('#specifications');
+		var btn = $('.btn-specifications');
+		var span = $('.close-specifications');
+		var overlay = $('.specifications-overlay');
+		btn.click(function () {
+			modal.show();
+			modal.addClass('active');
+		});
+
+		span.click(function () {
+			modal.hide();
+			modal.removeClass('active');
+		});
+		overlay.click(function () {
+			modal.hide();
+			modal.removeClass('active');
+		});
+		$(window).on('click', function (e) {
+			if ($(e.target).is('.modal')) {
+				modal.hide();
+			}
+		});
+	});
+</script>
