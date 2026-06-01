@@ -1,0 +1,50 @@
+<section class="section_product_new module_product">
+    <div class="container">
+        <div class="block-title">
+            <h2>
+                <a href="{{settings.section_new_url}}" title="{{settings.section_new_title}}">{{settings.section_new_title}}</a>
+            </h2>
+        </div>
+        <div class="block-product">
+            {%- if collections[settings.section_new_url].products.size > 0 -%}
+            <div class="row">
+                {%- for product in collections[settings.section_new_url].products limit: settings.section_new_limit -%}
+                <div class="col-lg-3 col-md-4 col-6 margin-bottom-30">
+                    {%- include 'product_grid_office' -%}    
+                </div>
+                {%- endfor -%}
+            </div>
+            
+            <div class="view-more">
+                <a href="{{settings.section_new_url}}">Xem tất cả</a>
+            </div>
+            
+            {%- else -%}
+            <div class="alert alert-warning" role="alert"><strong>{{ settings.section_new_title }}!</strong> Đang được cập nhật nội dung.</div>
+            {%- endif -%}
+        </div>
+    </div>
+</section>
+
+<style>
+/* CSS để nút luôn hiển thị và nằm giữa */
+.view-more {
+    text-align: center;
+    margin-top: 30px;
+    clear: both;
+    display: block !important;
+}
+.view-more a {
+    display: inline-block;
+    padding: 6px 30px;
+    background: #333; /* Bạn có thể đổi màu theo web của bạn */
+    color: #fff !important;
+    border-radius: 0px;
+    text-decoration: none;
+    transition: 0.3s;
+}
+.view-more a:hover {
+    background: #FF9F1C;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+</style>
