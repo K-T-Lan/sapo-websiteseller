@@ -1,0 +1,25 @@
+{% if customer %}
+    {% assign digest = customer.id | append:customer.email | append: '943da51b-9172-45c6-9f33-08e954a04156' | md5 %}
+
+	<script type="text/javascript">
+	window.appbulkloyalty = window.appbulkloyalty || {};
+	window.appbulkloyalty.shop = 'hvnh-inkio.mysapo.net';
+
+	window.appbulkloyalty.customer_id = '{{ customer.id }}';
+	window.appbulkloyalty.digest = '{{ digest }}';
+	</script>
+
+	<div class="appbulk-loyalty-widget"
+		data-digest="{{ digest }}"
+		data-shop="hvnh-inkio.mysapo.net"
+		data-customer-id="{{ customer.id }}"
+		data-channel-key="api_key??"></div>
+{% else %}
+	<script type="text/javascript">
+	window.appbulkloyalty = window.appbulkloyalty || {};
+	window.appbulkloyalty.shop = 'hvnh-inkio.mysapo.net';
+	</script>
+
+	<div class="appbulk-loyalty-widget"
+		data-shop="hvnh-inkio.mysapo.net"></div>
+{% endif %}
