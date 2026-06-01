@@ -1,0 +1,102 @@
+{% assign sold_out = true %}
+{% if product.available  %}
+{% assign sold_out = false %}
+{% assign awe-price = product.selected_or_first_available_variant.price %}
+{% assign awe-variant = product.selected_or_first_available_variant.title %}
+{% assign awe-compare-price = product.selected_or_first_available_variant.compare_at_price %}
+{%else%}
+{% assign awe-price = product.variants[0].price %}
+{% assign awe-variant = product.variants[0].title %}
+{% assign awe-compare-price = product.variants[0].compare_at_price %}
+{% endif %} 
+{%assign contact = false%}
+{%if awe-price == 0 %}
+{%assign contact = true%}
+{%endif%}
+{% assign on_sale = false %}
+{% if awe-compare-price > awe-price %}
+{% assign on_sale = true %}
+{% endif %}
+{% assign variantCount = product.variants | size %}
+{% assign on_var = false %}
+{% if variantCount > 1 %}
+{% assign on_var = true %}
+{% endif %}
+
+
+{% if awe-compare-price > awe-price %}
+{% capture discount %} 
+{{awe-compare-price | minus:awe-price | times:100 | divided_by:awe-compare-price | round }}% 
+{% endcapture %}
+{%assign pt = awe-compare-price | minus:awe-price | times:100 | divided_by:awe-compare-price%}
+{%if pt > 99 %}
+{% capture discount %}
+99%
+{% endcapture %}
+{%endif%}
+{%if pt < 1 %}
+{% capture discount %}
+1%
+{% endcapture %}
+{%endif%}
+{% assign on_sale = true %}
+{% endif %}
+{% assign variantCount = product.variants | size %}
+{% assign on_var = false %}
+{% if variantCount > 1 %}
+{% assign on_var = true %}
+{% endif %}
+
+{% if awe-compare-price > awe-price %}
+{% capture discount %} 
+{{awe-compare-price | minus:awe-price | times:100 | divided_by:awe-compare-price | round }}% 
+{% endcapture %}
+{%assign pt = awe-compare-price | minus:awe-price | times:100 | divided_by:awe-compare-price%}
+{%if pt > 99 %}
+{% capture discount %}
+99%
+{% endcapture %}
+{%endif%}
+{%if pt < 1 %}
+{% capture discount %}
+1%
+{% endcapture %}
+{%endif%}
+{% assign on_sale = true %}
+{% endif %}
+{% assign variantCount = product.variants | size %}
+{% assign on_var = false %}
+{% if variantCount > 1 %}
+{% assign on_var = true %}
+{% endif %}
+{% assign featured_image_alt = product.featured_image.alt | default: product.name%}
+
+
+
+<div class="product-mini-item clearfix  {% if sold_out %} sold-out{% endif %}{% if on_sale %} on-sale{% endif %}">
+	<a href="{{ product.url | within: collection }}" class="product-img" title="{{ product.name}}">
+		<img class="lazyload" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsQAAA7EAZUrDhsAAAANSURBVBhXYzh8+PB/AAffA0nNPuCLAAAAAElFTkSuQmCC"  data-src="{{ product.featured_image.src | img_url:'medium' }}" alt="{{ product.name }}">
+	</a>
+	<div class="product-info"> 
+		<h3><a href="{{ product.url | within: collection }}" title="{{ product.name }}" class="product-name">{{ product.name |truncate:50}}</a></h3>    		
+		<div class="price-box">
+			{% if product.available %}
+			{%if product.price < 1 %}
+			<span class="special-price">
+				<span class="price product-price">Liên hệ </span>
+			</span> <!-- Hết hàng -->
+			{%else%}
+			{% if product.compare_at_price_min > product.price_min %}
+			<span class="price f-left"><span class="price product-price">{{ product.price_min | money }}</span> </span> <!-- Giá Khuyến mại -->
+			<span class="old-price  f-left"><del class="sale-price">{{ product.compare_at_price_max | money }}</del> </span> <!-- Giá gốc -->
+			
+			{% else %}
+			<div class="special-price"><span class="price product-price">{{ product.price | money }}</span> </div> <!-- Giá -->
+			{% endif %}
+			{% endif %}
+			{% else %}
+			<div class="special-price"><span class="price product-price">Hết hàng </span> </div> <!-- Hết hàng -->
+			{% endif %}
+		</div>
+	</div>
+</div>
