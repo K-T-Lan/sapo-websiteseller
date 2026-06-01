@@ -1,0 +1,7 @@
+<section class="section_banner_big clearfix">
+	<div class="container">
+		<a class="scale_hover" href="{{settings.url_banner_collection}}" title="{{settings.title_banner_collection}}">
+			<img class="lazyload banner_leng" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsQAAA7EAZUrDhsAAAANSURBVBhXYzh8+PB/AAffA0nNPuCLAAAAAElFTkSuQmCC"  data-src="{{'banner-collection.jpg' | asset_url}}" alt="{{settings.title_banner_collection}}"/>
+		</a>
+	</div>
+</section>
