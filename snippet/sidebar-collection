@@ -1,0 +1,5 @@
+<div class="sidebar-collection">
+	<div id="collection-filters-container"></div>
+
+  {% include 'filter' %}
+</div>
