@@ -1,0 +1,52 @@
+<div id="sort-bar">
+  <span class="sort-label">
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M3 6h18M6 12h12M10 18h4"/>
+    </svg>
+    Xếp theo
+  </span>
+ 
+  <div class="sort-options" role="group" aria-label="Tùy chọn sắp xếp">
+    <button class="sort-btn active" data-value="default">Mặc định</button>
+    <button class="sort-btn" data-value="alpha-asc">Tên A-Z</button>
+    <button class="sort-btn" data-value="alpha-desc">Tên Z-A</button>
+    <button class="sort-btn" data-value="price-asc">Giá thấp đến cao</button>
+    <button class="sort-btn" data-value="price-desc">Giá cao xuống thấp</button>
+  </div>
+</div>
+ 
+<script>
+  function replaceUrlParam(url, paramName, paramValue) {
+    var pattern = new RegExp('(' + paramName + '=).*?(&|$)');
+    var newUrl = url.replace(pattern, '$1' + paramValue + '$2');
+    if (newUrl === url) {
+      newUrl = newUrl + (newUrl.indexOf('?') > 0 ? '&' : '?') + paramName + '=' + paramValue;
+    }
+    return newUrl;
+  }
+ 
+  function getParameterByName(name, href) {
+    name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+    var regex = new RegExp("[\\?&]" + name + "=([^&#]*)");
+    var results = regex.exec(href);
+    return results == null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+  }
+ 
+  document.addEventListener('DOMContentLoaded', function () {
+    var buttons = document.querySelectorAll('.sort-btn');
+    var currentSort = getParameterByName("sortby", window.location.href) || "default";
+ 
+    buttons.forEach(function (btn) {
+      if (btn.dataset.value === currentSort) {
+        buttons.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+      }
+      btn.addEventListener('click', function () {
+        buttons.forEach(b => b.classList.remove('active'));
+        this.classList.add('active');
+        var url = replaceUrlParam(window.location.href, 'sortby', this.dataset.value);
+        window.location.href = url;
+      });
+    });
+  });
+</script>
