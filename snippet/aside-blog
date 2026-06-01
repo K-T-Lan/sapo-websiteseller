@@ -1,0 +1,30 @@
+{%- include 'aside-cate-blog' -%}
+<div class="blog_noibat">
+	{% if blogs[settings.relate_blog].articles.size > 0 %}
+	{% assign blog_alias = settings.relate_blog %}
+	{% else %}
+	{% assign blog_alias = '#' %}
+	{% endif %}
+	<h2 class="h2_sidebar_blog">
+		<a href="/{{ blog_alias}}" title="{{ settings.news_relate }}">{{ settings.news_relate }}</a>
+	</h2>
+	<div class="blog_content">
+		{% for article in blogs[settings.relate_blog].articles | limit: settings.number_relate_blog %}
+		<div class="item clearfix">
+			<div class="post-thumb">
+				<a class="image-blog scale_hover" href="{{ article.url }}" title="{{ article.title }}">
+					{% if article.image != null %}
+					<img class="img_blog lazyload" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsQAAA7EAZUrDhsAAAANSURBVBhXYzh8+PB/AAffA0nNPuCLAAAAAElFTkSuQmCC" data-src="{{ article.image.src }}"  alt="{{ article.title }}">
+					{%else%}
+					<img class="img_blog lazyload" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsQAAA7EAZUrDhsAAAANSURBVBhXYzh8+PB/AAffA0nNPuCLAAAAAElFTkSuQmCC" data-src="{{ 'no-image.jpg' | asset_url }}" alt="{{ article.title }}" title="{{ article.title }}"/>
+					{% endif %}
+				</a>
+			</div>
+			<div class="contentright">
+				<h3><a title="{{ article.title }}" href="{{ article.url }}">{{ article.title }}</a></h3>
+
+			</div>
+		</div>
+		{% endfor %}
+	</div>
+</div>
