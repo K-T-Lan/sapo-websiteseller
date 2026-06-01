@@ -1,0 +1,42 @@
+{%if settings.product_tab_enable %}
+<div class="product-tab e-tabs not-dqtab">
+	<ul class="tabs tabs-title clearfix">	
+		{%if settings.product_tab1_enable%}
+		<li class="tab-link active" data-tab="#tab-1">
+			<h3>{{settings.product_tab1_title}}</h3>
+		</li>																	
+		{%endif%}
+
+		
+		{%if settings.product_tab3_enable%}
+		<li class="tab-link" data-tab="#tab-3">
+			<h3>{{settings.product_tab3_title}}</h3>
+		</li>																	
+		{%endif%}
+	</ul>																									
+	<div class="tab-float">
+		{%if settings.product_tab1_enable%}
+		<div id="tab-1" class="tab-content active content_extab">
+			<div class="rte product_getcontent">
+				{%if product.content != null and product.content != '' %}
+				<div id="content">
+					{{product.content}}
+				</div>
+				{%else%}
+				Thông tin sản phẩm đang được cập nhật
+				{%endif%}
+			</div>
+		</div>
+		{%endif%}
+
+		
+		{%if settings.product_tab3_enable%}
+		<div id="tab-3" class="tab-content content_extab">
+			<div class="rte">
+				{% include 'product-reviews' %}
+			</div>
+		</div>	
+		{%endif%}
+	</div>	
+</div>
+{%endif%}
