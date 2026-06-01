@@ -1,0 +1,6 @@
+@font-face{
+	font-family:"Roboto",sans-serif;
+	src:url({{'roboto-regular.ttf' | asset_url }});
+	font-weight: 400;
+	font-display:swap;
+}
