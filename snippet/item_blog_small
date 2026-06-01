@@ -1,0 +1,26 @@
+<div class="blogwp bloglr">
+	<a class="image-blog" href="{{ article.url }}" title="{{ article.title }}">
+		{% if article.image != null %}
+		<img class="imageload lazyload" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsQAAA7EAZUrDhsAAAANSURBVBhXYzh8+PB/AAffA0nNPuCLAAAAAElFTkSuQmCC" data-src="{{ article.image.src | img_url: 'large'}}"  alt="{{ article.title }}">
+		{%else%}
+		<img class="imageload lazyload" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsQAAA7EAZUrDhsAAAANSURBVBhXYzh8+PB/AAffA0nNPuCLAAAAAElFTkSuQmCC" data-src="https://placehold.it/686x386" alt="{{ article.title }}" title="{{ article.title }}"/>
+		{% endif %}		
+	</a>
+	<div class="contentright">
+		<h3>
+			<a href="{{ article.url }}" title="{{ article.title }}">{{ article.title }}</a>
+		</h3>
+		<div class="posts">
+			{{ article.created_on | date:'dd/MM/yyyy hh:mm'}}
+		</div>
+		{%if article.content != null%}
+		<p>
+			{{article.content | strip_html | truncate: 150}}
+			{%if article.summary_or_content != '' %}
+			<a href="{{ article.url }}" class="doctiep" title="Đọc tiếp">[Đọc tiếp]</a>
+			{%endif%}
+		</p>
+		{%endif%}
+
+	</div>
+</div>
