@@ -1,0 +1,73 @@
+$main-color: {{ settings.main_color }};
+$hover: {{ settings.hover_color }};
+.layout-contact {
+	margin-bottom: 30px;
+	.contact  {
+		margin-bottom: 20px;
+		h4{
+			font-size: 15px;
+			text-transform: uppercase;
+			font-weight: bold;
+			margin-bottom: 20px;
+		}
+		.time_work {
+			.item {
+				position: relative;
+				padding-left: 26px;
+				font-size: 14px;
+				margin-bottom: 5px;
+				svg{
+					width: 15px;
+					height: 15px;
+					position: absolute;
+					top: 3px;
+					left: 0;
+				}
+			}
+		}
+	}
+	.form-contact{
+		h4{
+			font-size: 15px;
+			text-transform: uppercase;
+			font-weight: bold;
+			margin-bottom: 20px;
+		}
+		.group_contact  {
+			input, textarea{
+				border: 1px solid #e1e1e1;
+				width: 100%;
+				margin-bottom: 15px;
+				outline: none;
+				font-size: 14px;
+			}
+			input{
+				padding:5px 20px;
+			}
+			textarea{
+				padding: 10px 20px;
+			}
+			.btn-lienhe {
+				background: #333;
+				color: #fff;
+				border: initial;
+				padding: 0 20px;
+				height: 35px;
+				line-height: 35px;
+				font-size: 14px;
+				&:hover{
+					background: $hover;
+				}
+			}
+		}
+	}
+}
+@media (max-width: 991px){
+	.form-contact{
+		margin-bottom: 30px;
+	}
+}
+#contact_map iframe {
+    width: 100%;
+    height: 450px;
+}
