@@ -1,0 +1,73 @@
+<div class="layout-collection">
+	{% include 'breadcrumb' %}  
+	<div class="container">
+		<div class="row">
+			<aside class="dqdt-sidebar sidebar col-lg-3 col-12">
+				{%- include 'aside-cate' -%}
+				<div id="collection-filters-container"></div>
+			</aside>
+			<div class="block-collection col-lg-9 col-12">
+				<h1 class="title-page d-md-block d-none">{%if collection.name == 'All'%}Tất cả sản phẩm{%else%}{{ collection.name }}{%endif%}</h1>
+				<div class="category-products">
+					{% if collection.products.size > 0 %}
+					{%include 'collection-sortby'%}
+					{%endif%}
+					{% paginate collection.products by settings.collection_number_product %}
+					{% if collection.products.size > 0 %}
+					{%include 'products-grid-item'%}
+					{% else %}
+					<div class="alert alert-warning alert-dismissible margin-top-15 section" role="alert">
+						<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+						Sản phẩm đang được cập nhật.
+					</div>
+					{% endif %}
+					{% endpaginate %}
+				</div>
+			</div>
+		</div>
+		<div id="open-filters" class="open-filters d-lg-none d-xl-none">
+			<i class="fa fa-filter"></i>
+			<span>Lọc</span>
+		</div>
+	</div>
+</div>
+<div class="opacity_sidebar"></div>
+<script>
+	var colName = "{%if page_title == 'All'%}Tất cả sản phẩm{%else%}{{ page_title }}{%endif%}";
+	{% if collection.id > 0 %}
+	var colId = {{collection.id}};
+	{%else%}
+	var colId = 0;
+	{%endif%}
+	var selectedViewData = "{% if template contains '.list' %}data_list{% else %}data{% endif %}";
+</script>
+<input id="collection_id" value="{{collection.id}}" type="hidden"/>
+
+<script>
+var BizwebCollectionFilterData = {
+  store: "{{ shop.permanent_domain }}",
+  domain: "https://apps.sapo.vn/collectionfilter/"
+};
+
+// Chặn app filter replace giao diện, chỉ lấy phần sản phẩm
+$(document).ready(function() {
+  var _originalAjax = $.ajax;
+  $.ajax = function(options) {
+    if (options.url && options.url.indexOf('/search') > -1 && options.url.indexOf('view=data_grid') > -1) {
+      var _originalSuccess = options.success;
+      options.success = function(data) {
+        // Chỉ lấy phần row chứa sản phẩm từ kết quả trả về
+        var $data = $(data);
+        var newProducts = $data.find('.products-view .row').html() || $data.filter('.products-view').find('.row').html();
+        if (newProducts) {
+          $('.products-view .row').html(newProducts);
+        } else {
+          // Fallback: gọi hàm gốc
+          if (_originalSuccess) _originalSuccess(data);
+        }
+      };
+    }
+    return _originalAjax.apply(this, arguments);
+  };
+});
+</script>
