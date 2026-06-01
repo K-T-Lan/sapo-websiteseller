@@ -1,0 +1,16 @@
+<h1 class="d-none">{{store.name}} - {{store.description}}</h1>
+
+{%for i in (1..5)%}
+{%capture enable%}home_section_{{i}}{%endcapture%}
+{% if settings[enable] != 'none' %}
+{% include settings[enable] %}
+{% endif %}
+{%endfor%}
+{%comment%}
+{%include 'section_slider'%}
+{%include 'section_product_new'%}
+{%include 'section_product_featured'%}
+{%include 'section_product_combo'%}
+{%include 'section_blog'%}
+{%include 'section_brand'%}
+{%endcomment%}
