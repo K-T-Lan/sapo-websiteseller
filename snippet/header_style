@@ -1,0 +1,27 @@
+<link rel="preload" as='style' type="text/css" href="{{ 'main.scss.css' | asset_url }}">
+<link rel="preload" as='style'  type="text/css" href="{{ 'index.scss.css' | asset_url }}">
+<link rel="preload" as='style'  type="text/css" href="{{ '404page.scss.css' | asset_url }}">
+<link rel="preload" as='style'  type="text/css" href="{{ 'bootstrap-4-3-min.css' | asset_url }}">
+<link rel="preload" as='style'  type="text/css" href="{{ 'quickviews_popup_cart.scss.css' | asset_url }}">
+<style>
+	:root {
+		--mainColor: {{settings.main_color}};
+		--textColor: #231f20;
+	}
+</style>
+<link rel="stylesheet" href="{{'bootstrap-4-3-min.css' | asset_url}}">
+{{ 'main.scss.css' | asset_url | stylesheet_tag }}	
+<link rel="preload" as='style' type="text/css" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap">
+{%if template != 'index'%}{{ 'breadcrumb_style.scss.css' | asset_url | stylesheet_tag }}{%endif%}
+{%if template contains 'index'%}{{ 'index.scss.css' | asset_url | stylesheet_tag }}{%endif%}
+{%if template contains '404'%}{{ '404page.scss.css' | asset_url | stylesheet_tag }}{%endif%}
+{%if template contains 'page'%}{{ 'style_page.scss.css' | asset_url | stylesheet_tag }}{%endif%}
+{%if template contains 'cart'%}{{ 'cartpage.scss.css' | asset_url | stylesheet_tag }}	{%endif%}
+{%if template contains 'blog' or template contains 'article'%}{{ 'blog_article_style.scss.css' | asset_url | stylesheet_tag }}{%endif%}
+{%if template contains 'collection' or template contains 'blog'  or template contains 'article'%}{{ 'sidebar_style.scss.css' | asset_url | stylesheet_tag }}	{%endif%}
+{%if template contains 'product'%}{{ 'product_style.scss.css' | asset_url | stylesheet_tag }}{%endif%}
+{%if template contains 'contact'%}{{ 'contact_style.scss.css' | asset_url | stylesheet_tag }}{%endif%}
+{%if template contains 'customers'%}{{ 'account_oder_style.scss.css' | asset_url | stylesheet_tag }}{%endif%}
+{%if template contains 'collection' or template contains 'search'%}{{ 'collection_style.scss.css' | asset_url | stylesheet_tag }}{%endif%}
+{%if template contains 'search' %}{{ 'search_style.scss.css' | asset_url | stylesheet_tag }}{%endif%}
+{%if template contains 'product' or template contains 'index' or template contains 'search' or template contains 'collection'  or template contains 'page' %}{{ 'quickviews_popup_cart.scss.css' | asset_url | stylesheet_tag }}{%endif%}
