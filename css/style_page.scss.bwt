@@ -1,0 +1,17 @@
+/*============================================================================
+#Variable
+==============================================================================*/
+$gutter: 30px;
+$main-color: {{ settings.main-color }};
+$hover: {{ settings.main-color}};
+$font-base: 'Roboto', sans-serif;
+$text-color: {{ settings.color_body_text }};
+$price: $main-color;
+
+
+.content-page  {
+	min-height:400px;
+	ul, ol {
+		padding-left:20px;
+	}
+}
