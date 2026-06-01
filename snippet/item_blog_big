@@ -1,0 +1,19 @@
+<div class="itembb_full">
+	<div class="itemblog_big">
+		<a class="image-blog scale_hover" href="{{ article.url }}" title="{{ article.title }}">
+			{% if article.image != null %}
+			<img class="imageload lazyload" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsQAAA7EAZUrDhsAAAANSURBVBhXYzh8+PB/AAffA0nNPuCLAAAAAElFTkSuQmCC" data-src="{{ article.image.src }}"  alt="{{ article.title }}">
+			{%else%}
+			<img class="imageload lazyload" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsQAAA7EAZUrDhsAAAANSURBVBhXYzh8+PB/AAffA0nNPuCLAAAAAElFTkSuQmCC" data-src="{{ 'no-image2.jpg' | asset_url }}" alt="{{ article.title }}" title="{{ article.title }}"/>
+			{% endif %}	
+		</a>
+		<div class="itemblog_content">
+			<h3>
+				<a href="{{ article.url }}" title="{{ article.title }}">{{ article.title }}</a>
+			</h3>
+			<div class="posts">
+				{{ article.created_on | date:'dd/MM/yyyy hh:mm'}}
+			</div>
+		</div>
+	</div>
+</div>
